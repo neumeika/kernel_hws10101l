@@ -1,0 +1,163 @@
+menu "Hisilicon K3 board feature"
+	depends on ARCH_K3V2
+
+# -------------------------------------
+if ARCH_K3V2
+
+comment "Hisilicon K3V200 options"
+
+choice
+	prompt "Select K3V200 processor family for target system"
+
+config ARCH_K3V2_Hi362x_SOC
+	bool "Hi362x family"
+	select CPU_V7
+	select ARM_GIC
+	select MACH_K3V2OEM1
+	select MIGHT_HAVE_PCI
+	help
+	  Support for Hisilicon K3V200 Hi362x processors, based on the
+	  ARM CortexA9MP CPU and the ARM PL310 L2 cache controller
+
+endchoice
+
+# config MACH_TC45MSU3
+#	bool "TC45MSU3 Board"
+#	help
+#	  Support for  Hisilicon TC45MSU3 FPGA Verify platform
+
+config MACH_K3V2OEM1
+	bool "K3V2OEM1 Board"
+	select REGULATOR_HI6421
+	help
+	  Support for  Hisilicon K3V2 SOC OEM 1 platform
+
+config MACH_K3V2OEM2
+	bool "K3V2OEM2 Board"
+	select REGULATOR_HI6421
+	help
+	  Support for  Hisilicon K3V2 SOC OEM 2 platform
+
+comment "K3V200 features"
+config K3_EDB_LEVEL
+	int "Kernel Early-Debug Level( 0~254, 255 => Disable Early-Debug)"
+	range 0 255
+	default "0"
+	help
+	  Set the debug level of Early-Debug, low level will cause more debug message
+# ADC driver
+
+config IPPS_SUPPORT
+	bool "IPPS driver support"
+	select ARCH_HAS_CPUFREQ
+	default y
+	help
+	  IPPS driver support for cpu gpu ddr dvfs.
+
+config IPPS_PARAM_ALTERNATIVE
+	bool "IPPS parameters seperate from firmware"
+	default y
+	help
+	  IPPS parameters seperate from firmware.
+
+config TRIM_VOL
+	bool "TRIM Voltage support"
+	default n
+	help
+	  TRIM Voltage patch support.
+
+config S10_IPPS_FIRMWARE
+	bool "S10 IPPS Firmware"
+	depends on IPPS_SUPPORT
+	default n
+	help
+	  S10 Special IPPS Firmware.
+
+config MMC_EMMC_DEVICE
+	bool "emmc device support"
+	default y
+	help
+	  EMMC device support.
+
+config MMC_SD_DEVICE
+	bool "sd device support"
+	default y
+	help
+	  SD device support.
+
+config MMC_SDIO_DEVICE
+	bool "sdio device support"
+	default y
+	help
+	  SDIO device support.
+config WIFI_DEVICE
+	bool "bcm4330-wifi device support"
+	select WIFI_CONTROL_FUNC
+	default n
+	help
+	  bcm4330-wifi device support
+
+#
+config XMM_POWER
+	bool "xmm6260 power control support"
+	default n
+	help
+	  xmm6260 power control
+
+config XMM_RMNET
+	bool "xmm6260 rmnet support"
+	default n
+	help
+	  xmm6260 rmnet
+
+config BALONG_POWER
+        bool "balong power control support"
+        default y
+        help
+          balong power control
+	  
+#
+config BALONG_FLASHLESS_POWER
+ 	bool "balong flashless version power control support"
+        depends on !BALONG_POWER
+	default n
+        help
+          balong flashless verion power control
+	  
+ config MAX_TTY_BUFFER
+	int "MAX tty buffer"
+	default "2097152"
+	help
+		Set the default max tty buffer sie 2M for Balong Flashless
+#
+
+config BALONG_RMNET
+        bool "balong rmnet support"
+        default y
+        help
+          balong rmnet
+#
+
+config DEFAULT_TIMERCLK
+	int "Kernel Timer Clock Frequence"
+	default "26000000"
+	help
+		Set default timer clock frequence
+
+config CONNECTIVE_CONTROL_FPGA
+	bool "connective platform select"
+	default n
+	help
+		Set connective platform
+
+config LOWPM_DEBUG
+	bool "low power debug property"
+	depends on DEBUG_FS
+	help
+
+config HAS_EXTRAL_DCDC
+	help
+	  EMMC device support.
+endif
+endmenu
+

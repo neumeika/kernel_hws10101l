@@ -1,0 +1,4 @@
+menu "S10 linux device driver support package"
+
+source "drivers/S10/device/Kconfig"
+endmenu

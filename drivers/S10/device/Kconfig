@@ -1,0 +1,17 @@
+#sensor unification for differ platform
+menu "S10 linux device driver support package"
+
+config S10_SENSORS_INPUT_INFO
+	bool "S10 sensor input info"
+	default n
+	help
+		get the S10 sensor input information.
+source "drivers/S10/device/accelerometer/Kconfig"
+
+source "drivers/S10/device/compass/Kconfig"
+
+source "drivers/S10/device/light/Kconfig"
+
+source "drivers/S10/device/gyroscope/Kconfig"
+
+endmenu
